@@ -46,15 +46,15 @@ public class EnseignantController implements Initializable {
 
     public void addEnseignant(ActionEvent actionEvent) {
         String nom=textNom.getText();
-//        String prenom=textPrenom.getText();
-//        String adresse=textAdresse.getText();
-//        String telephone=textTelephone.getText();
+        String prenom=textPrenom.getText();
+        String adresse=textAdresse.getText();
+        String telephone=textTelephone.getText();
         if(nom.isEmpty()){
             Alert alert=new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Veuillez saisir un nom !!!");
             alert.show();
         }else{
-            //     observableList.add(new Enseignant(nom,prenom,adresse,telephone));
+                 observableList.add(new Enseignant(nom,prenom,adresse,telephone));
             textNom.clear();
         }
     }
