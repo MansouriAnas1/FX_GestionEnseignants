@@ -9,13 +9,32 @@ public class Enseignant implements Serializable {
     private String adresse;
     private String telephone;
 
+    private Departement departement;
+
     public Enseignant() {};
 
-    public Enseignant(String nom, String prenom, String adresse, String téléphone) {
+    public Enseignant(String nom, String prenom, String adresse, String téléphone,Departement departement) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.telephone = téléphone;
+        this.departement=departement;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public Departement getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
     }
 
     public void setID(int ID) {
@@ -66,6 +85,7 @@ public class Enseignant implements Serializable {
                 ", prenom='" + prenom + '\'' +
                 ", adresse='" + adresse + '\'' +
                 ", telephone='" + telephone + '\'' +
+                ", Departement='" + departement + '\'' +
                 '}';
     }
 }

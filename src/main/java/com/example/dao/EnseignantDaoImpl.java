@@ -1,8 +1,8 @@
 package com.example.dao;
 
+import com.example.dao.entities.Departement;
 import com.example.dao.entities.Enseignant;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,9 +13,7 @@ import java.util.List;
 public class EnseignantDaoImpl implements EnseignantDao {
     @Override
     public List<Enseignant> findAll() throws SQLException {
-        System.out.println("im here");
         Connection connection = SingletonConnexionDB.getConnection();
-        System.out.println("im now here");
         PreparedStatement stm = connection.prepareStatement("select * from ENSEIGNANT");
         ResultSet rs = stm.executeQuery();
         List<Enseignant> enseignants = new ArrayList<>();
@@ -26,6 +24,7 @@ public class EnseignantDaoImpl implements EnseignantDao {
             e.setPrenom(rs.getString("prenom"));
             e.setAdresse(rs.getString("adresse"));
             e.setTéléphone(rs.getString("telephone"));
+            e.setDepartement(new Departement(rs.getInt("departement")));
             System.out.println(e);
             enseignants.add(e);
         }
@@ -54,14 +53,14 @@ public class EnseignantDaoImpl implements EnseignantDao {
     @Override
     public Enseignant save(Enseignant e) throws SQLException {
         Connection connection = SingletonConnexionDB.getConnection();
-        PreparedStatement stm = connection.prepareStatement("insert into ENSEIGNANT(NOM,PRENOM,ADRESSE,TELEPHONE)" +
-                " values (?,?,?,?)");
+        PreparedStatement stm = connection.prepareStatement("insert into ENSEIGNANT(NOM,PRENOM,ADRESSE,TELEPHONE,DEPARTEMENT)" +
+                " values (?,?,?,?,?)");
 
         stm.setString(1,e.getNom());
         stm.setString(2,e.getPrenom());
         stm.setString(3,e.getAdresse());
         stm.setString(4,e.getTéléphone());
-
+        stm.setInt(5,e.getDepartement().getId());
         stm.executeUpdate();
         return e;
     }
